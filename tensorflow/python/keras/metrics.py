@@ -1577,14 +1577,14 @@ class SensitivitySpecificityBase(Metric, metaclass=abc.ABCMeta):
     Args:
       constrained: Over these values the constraint
         is specified. A rank-1 tensor.
-      dependent: From these values the maximum that satiesfies the
+      dependent: From these values the maximum that satisfies the
         constraint is selected. Values in this tensor and in
         `constrained` are linked by having the same threshold at each
         position, hence this tensor must have the same shape.
       predicate: A binary boolean functor to be applied to arguments
       `constrained` and `self.value`, e.g. `tf.greater`.
 
-    Returns maximal dependent value, if no value satiesfies the constraint 0.0.
+    Returns maximal dependent value, if no value satisfies the constraint 0.0.
     """
     feasible = array_ops.where_v2(predicate(constrained, self.value))
     feasible_exists = math_ops.greater(array_ops.size(feasible), 0)
